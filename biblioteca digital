@@ -1,0 +1,94 @@
+[8:58 a.m., 13/6/2024] Dazai: import tkinter as tk
+from tkinter import ttk, messagebox
+from PIL import Image, ImageTk
+import mysql.connector
+import time
+
+class BibliotecaApp:
+    def _init_(self, master):
+        self.master = master
+        self.master.geometry("800x600")
+        self.master.configure(background='#EDFCFA')
+        self.master.title("BIBLIOTECA EL BUHO")
+        
+        self.frame_izquierdo = tk.Frame(self.master, bg="white")
+        self.frame_izquierdo.place(relwidth=0.5, relheight=1)
+        self.frame_izquierdo.option_add("*background", '#EDFCFA')
+        
+        try:
+            imagen = Image.open("pollito.png")  
+            imagen = imagen.resize((400, 600))
+            imagen_fondo = ImageTk.PhotoImage(imagen)
+        except IOError as e:
+            print("Er…
+[8:58 a.m., 13/6/2024] Dazai: import tkinter as tk
+from PIL import Image, ImageTk
+
+class AnimacionApp:
+    def _init_(self, master):
+        self.master = master
+        self.master.geometry("500x500")
+        
+        # Cargar la imagen
+        self.image = Image.open("pollito.png")
+        self.photo = ImageTk.PhotoImage(self.image)
+        
+        # Crear la etiqueta de la imagen
+        self.label_image = tk.Label(self.master, image=self.photo)
+        self.label_image.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        
+        # Crear la etiqueta de texto
+        self.label_text = tk.Label(self.master, text="¡Hola, mundo!", font=("Arial", 24))
+        self.label_text.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+        
+        # Iniciar la animación
+        self.animar_aparicion()…
+[9:35 a.m., 13/6/2024] Kariiiii: import tkinter as tk
+from tkinter import messagebox
+import shutil
+import os
+
+class BookDownloaderApp:
+    def _init_(self, root):
+        self.root = root
+        self.root.title("Descargador de Libros")
+        self.root.geometry("400x200")
+
+        self.label = tk.Label(self.root, text="Seleccione un libro para descargar:")
+        self.label.pack(pady=10)
+
+        self.book_listbox = tk.Listbox(self.root, width=50)
+        self.book_listbox.pack()
+
+        self.populate_book_list()
+
+        self.download_button = tk.Button(self.root, text="Descargar Libro", command=self.download_book)
+        self.download_button.pack(pady=10)
+
+    def populate_book_list(self):
+        # Aquí puedes agregar la lógica para obtener la lista de libros disponibles
+        # Por ahora, asumiré que los libros están en un directorio llamado "libros"
+        # dentro del mismo directorio que este script.
+        books_directory = "libros"
+        for filename in os.listdir(books_directory):
+            if filename.endswith(".pdf"):
+                self.book_listbox.insert(tk.END, filename)
+
+    def download_book(self):
+        selected_book_index = self.book_listbox.curselection()
+        if selected_book_index:
+            selected_book = self.book_listbox.get(selected_book_index)
+            # Aquí puedes agregar la lógica para copiar el libro seleccionado
+            # a la carpeta de descargas del usuario o a cualquier ubicación deseada.
+            try:
+                shutil.copy(os.path.join("libros", selected_book), "Descargas")
+                messagebox.showinfo("Éxito", f"Libro '{selected_book}' descargado exitosamente.")
+            except Exception as e:
+                messagebox.showerror("Error", f"Error al descargar el libro: {str(e)}")
+        else:
+            messagebox.showerror("Error", "Por favor, seleccione un libro para descargar.")
+
+if _name_ == "_main_":
+    root = tk.Tk()
+    app = BookDownloaderApp(root)
+    root.mainloop()
